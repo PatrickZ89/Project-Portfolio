@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import ProjectPage from '../ProjectPage/ProjectPage'
 import './App.css';
 
 class App extends Component {
@@ -6,10 +8,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <p>Empty Page</p>
+        <ProjectPage />
       </div>
     );
   }
 }
 
-export default App;
+const mapReduxStateToProps = reduxState => ({
+  reduxState
+});
+
+export default connect(mapReduxStateToProps)(App);

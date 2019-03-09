@@ -4,16 +4,29 @@ import './index.css';
 import App from './components/App/App.js';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { takeEvery, put as dispatch } from 'redux-saga/effects';
 // Provider allows us to use redux within our react app
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
+import axios from 'axios';
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
 
 // Create the rootSaga generator function
 function* rootSaga() {
-
+    yield takeEvery('FETCH_PROJECTS', fetchProjects);
 }
+
+function* fetchProjects() {
+    console.log('fetchProjects was hit');
+    try {
+      const projectResponse = yield axios.get('/api/project');
+      yield dispatch({ type: 'ADD_PROJECT', payload: projectResponse.data })
+    } catch (error) {
+      console.log('this was an error with the fetch- probably your fault');
+    }
+  }
+
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
