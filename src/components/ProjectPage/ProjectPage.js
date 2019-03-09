@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ProjectCard from '../ProjectCard/ProjectCard'
 
 class ProjectPage extends Component {
 
@@ -19,7 +20,16 @@ class ProjectPage extends Component {
         <h1>Patrick Zarkha</h1>
       </div>
       <div>
-      <p>{JSON.stringify(this.props.reduxState.plantList)}</p>
+      {this.props.reduxState.projects.map((project) => {
+                    return (
+                        <>
+                            <ProjectCard 
+                            key={project.id}
+                            project={project}
+                             />
+                        </>
+                    );
+                })}
       </div>
       </>
     );

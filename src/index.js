@@ -21,7 +21,7 @@ function* fetchProjects() {
     console.log('fetchProjects was hit');
     try {
       const projectResponse = yield axios.get('/api/project');
-      yield dispatch({ type: 'ADD_PROJECT', payload: projectResponse.data })
+      yield dispatch({ type: 'SET_PROJECTS', payload: projectResponse.data })
     } catch (error) {
       console.log('this was an error with the fetch- probably your fault');
     }
@@ -35,7 +35,8 @@ const sagaMiddleware = createSagaMiddleware();
 const projects = (state = [], action) => {
     switch (action.type) {
         case 'SET_PROJECTS':
-            return action.payload;
+            state= action.payload
+            return state;
         default:
             return state;
     }
