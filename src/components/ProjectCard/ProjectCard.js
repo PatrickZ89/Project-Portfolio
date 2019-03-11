@@ -28,7 +28,9 @@ const styles = {
     },
      
   };
+  
 class ProjectCard extends Component {
+
 
     deleteProject = (key) => () => {
         console.log('Key:', key);
