@@ -22,3 +22,19 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.flex-container {
+  display: flex;
+}
+
+.image {
+  height: 200px;
+  padding: 30px;
+}
+
+body {
+  background-image: url('./image/project.jpg');
+  background-size: cover;
+  color: rgb(211, 193, 193);
+
+}

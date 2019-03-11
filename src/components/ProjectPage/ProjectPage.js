@@ -12,19 +12,14 @@ class ProjectPage extends Component {
         this.props.dispatch({ type: 'FETCH_PROJECTS' })
     }
 
-
   render() {
     return (
         <>
-      <div className="App-header">
-        <h1>Patrick Zarkha</h1>
-      </div>
-      <div>
+      <div className="flex-container">
       {this.props.reduxState.projects.map((project) => {
                     return (
                         <>
                             <ProjectCard 
-                            key={project.id}
                             project={project}
                              />
                         </>

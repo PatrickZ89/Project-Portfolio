@@ -7,11 +7,13 @@ import PropTypes from 'prop-types';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import { lightGreen } from '@material-ui/core/colors';
 
 const styles = {
     card: {
       width: 275,
       margin:25,
+      color: lightGreen,
     },
     bullet: {
       display: 'inline-block',
@@ -28,7 +30,11 @@ const styles = {
   };
 class ProjectCard extends Component {
 
-// function ProjectCard(props) {
+    deleteProject = (key) => () => {
+        console.log('Key:', key);
+
+        this.props.dispatch({ type: 'DELETE_PROJECT', payload: key })
+    }
 
 render(){
 
@@ -45,7 +51,7 @@ render(){
           description: {this.props.project.description}
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
-          thumbnail: {this.props.project.thumbnail}
+          <img src={this.props.project.thumbnail} className="image" alt="broken" />
           </Typography>
           <Typography component="p">
           website: {this.props.project.website}
@@ -61,7 +67,7 @@ render(){
           </Typography>
         </CardContent>
         <CardActions>
-          <Button >Delete</Button>
+          <Button onClick={this.deleteProject(this.props.project.id)}>Delete</Button>
         </CardActions>
       </Card>
     );

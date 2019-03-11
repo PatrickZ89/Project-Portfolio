@@ -15,6 +15,8 @@ import createSagaMiddleware from 'redux-saga';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_PROJECTS', fetchProjects);
+    yield takeEvery('POST_PROJECT', postProject)
+    yield takeEvery('DELETE_PROJECT', deleteProject)
 }
 
 function* fetchProjects() {
@@ -26,6 +28,32 @@ function* fetchProjects() {
       console.log('this was an error with the fetch- probably your fault');
     }
   }
+
+  function* postProject(action) {
+    console.log('postProjects was hit');
+    try {
+      yield axios.post('/api/project', action.payload );
+      yield dispatch({ type: 'FETCH_PROJECTS'});
+    } catch (error) {
+      console.log('this was an error with the post- probably your fault');
+  
+    }
+  }
+
+  function* deleteProject(action) {
+    try {
+      console.log('delete function was hit', action)
+     
+      yield axios({
+        method: 'DELETE',
+        url: `/api/project/`+action.payload,
+      });
+      yield dispatch({ type: 'FETCH_PROJECTS' })
+    } catch (error) {
+      console.log('Error with Delete:', error)
+    }
+  }
+  
 
 
 // Create sagaMiddleware
