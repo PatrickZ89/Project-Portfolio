@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import ProjectPage from '../ProjectPage/ProjectPage'
+import AdminForm from '../AdminForm/AdminForm'
 
 class AdminPage extends Component {
     state = {
@@ -39,6 +40,9 @@ class AdminPage extends Component {
         
         event.preventDefault();
         this.props.dispatch({ type: 'POST_PROJECT', payload: this.state.newProject })
+        // .then((response)=>{
+        //     alert('Project Added to Database')
+        // })
         this.setState({
             newProject: {
                 id: this.state.newProject.id + 1,
@@ -68,6 +72,7 @@ class AdminPage extends Component {
 
                     <Button type='submit' value='Add New Project' variant="contained" color="primary" > Add New</Button>
                 </form>
+                <AdminForm />
                 <ProjectPage />
             </div>
         );
